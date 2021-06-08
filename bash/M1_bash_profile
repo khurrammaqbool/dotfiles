@@ -1,0 +1,98 @@
+###############
+# HIST 
+###############
+export HISTCONTROL=ignoredups:erasedups  # avoid duplicates..
+export HISTSIZE=100000                   # big big history
+export HISTFILESIZE=1000000              # big big history
+shopt -s histappend                      # append history entries..
+
+###############
+# LANG
+###############
+export LANGUAGE='en_US.UTF-8'
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
+
+###############
+# BASH PROMPT #
+###############
+
+
+###############
+# COLOR
+###############
+export CLICOLOR=1
+LSCOLORS=exfxcxdxbxegedabagacad
+bldred='\e[1;31m' # Red
+bldgrn='\e[1;32m' # Green
+bldylw='\e[1;33m' # Yellow
+bldppl='\e[1;35m' # Purple
+bldcyn='\e[1;36m' # Cyan
+bldwht='\e[1;37m' # White
+txtrst='\e[0m'    # Text Reset - Useful for avoiding color bleed
+
+
+
+###############
+# ALIAS
+###############
+alias ll='ls -ahl'
+alias R='/Library/Frameworks/R.framework/Versions/4.0/Resources/bin/R'
+
+
+###############
+# CONDA
+###############
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('$HOME/opt/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "$HOME/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="$HOME/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+###############
+# HOMEBREW
+###############
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+
+###############
+# PERLBREW
+###############
+#source ~/perl5/perlbrew/etc/bashrc
+perlbrew use perl-5.30.3
+
+###############
+# GIT
+###############
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+###############
+# BASH PROMPT 
+###############
+export PS1="\u@\h \[\e[32m\]\w \[\e[91m\]\$(parse_git_branch)\[\e[00m\]$ "
+export PS1="\[\e[0;33m\]M1:\[\e[34m\]\w:\[\e[91m\]\$(parse_git_branch)\[\e[34m\]$ "
+export PS1="\[\e[0;93m\]M1:\[\e[91m\]$CONDA_DEFAULT_ENV:\[\e[34m\]\W:\[\e[91m\]\$(parse_git_branch)\[\e[93m\]> "
+export PS1="\[\e[0;93m\]M1:\[\e[34m\]\W:\[\e[91m\]\$(parse_git_branch)\[\e[93m\]> "
+
+export GREP_OPTIONS='--color=always'
+#export GREP_COLOR='1;35;40'
+alias grep='GREP_COLOR="1;37;41" LANG=C grep --color=auto'
+alias grep='LANG=C grep --color=auto'
+
+###############
+# ALIAS
+###############
+alias ll='ls -ahl'
+alias R='/Library/Frameworks/R.framework/Versions/4.0/Resources/bin/R'
